@@ -1,0 +1,54 @@
+create table employee(
+employee_id int primary key,
+first_name varchar (255) not null,
+last_name varchar (255) not null,
+manager_ID int,
+foreign key (manager_id)
+references employee (employee_id)
+on delete cascade
+);
+
+insert into employee (
+	employee_id,
+	first_name,
+	last_name,
+	manager_id
+)
+values 
+(1, 'windy','hays',null),
+(2,'ava','christensen',1),
+(3,'hassan','conner',1),
+(4,'anna','reeves',2),
+(5,'sau','norman',2),
+(6,'kelsie','hays',3),
+(7,'tony','goff',3),
+(8,'salley','lester',3);
+
+commit;
+
+select
+	e.first_name || ' ' || e.last_name employee,
+	m.first_name || ' ' || m.last_name manager
+from
+	employee e
+inner join employee m on
+	m.employee_id = e.manager_id
+order by
+	manager;
+
+select
+	e.first_name || ' ' || e.last_name employee,
+	m.first_name || ' ' || m.last_name manager
+from
+	employee e
+left outer join employee m 
+on m.employee_id = e.manager_id
+order by
+	manager;
+
+select f1.title , f2.title , f1.length from film f1
+inner join film f2
+on f1.title <> f2.title and f1.length = f2.length 
+;
+
+

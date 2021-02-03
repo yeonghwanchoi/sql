@@ -1,0 +1,63 @@
+create table sales2007_1
+(
+	name varchar(50),
+	amount numeric(15,2)
+);
+
+insert into sales2007_1
+values ('mike', 150000.25),
+		('jon',132000.75),
+		('mary',100000);
+commit;
+
+create table sales2007_2
+(
+name varchar(50),
+amount numeric(15,2)
+);
+
+insert into sales2007_2
+values ('mike',120000.25),
+		('jon',142000.75),
+		('mary',100000);
+		
+select * from sales2007_1;
+select * from sales2007_2;
+
+select *
+from sales2007_2 
+union 
+select *
+from sales2007_1;
+
+select name
+from sales2007_1
+union
+select name 
+from sales2007_2
+
+select amount
+from sales2007_1
+union 
+select amount 
+from sales2007_2
+
+select amount
+from sales2007_1
+union all
+select amount 
+from sales2007_2
+
+select name
+from sales2007_1
+union all 
+select name 
+from sales2007_2 
+
+select *
+from sales2007_1
+union all
+select * 
+from sales2007_2
+order by name desc
+

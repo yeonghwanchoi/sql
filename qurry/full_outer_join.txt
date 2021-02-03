@@ -1,0 +1,39 @@
+create table 
+if not exists departments
+(
+departments_id serial primary key,
+departments_name varchar (255) not null
+);
+
+create table
+if not exists employees123
+(
+employees_id serial primary key,
+employees_name varchar (255),
+departments_id integer
+);
+commit;
+
+insert into departments (departments_name)
+values 
+('sales'),
+('marketing'),
+('hr'),
+('it'),
+('proeuction');
+
+insert into employees123 (
+	employees_name,
+	departments_id)
+values 
+('bette',1),
+('christian',1),
+('joe',2),
+('fred',3),
+('sandra',4),
+('julia',null);
+commit;
+
+select e.employees_name, d.departments_name  from employees123 e 
+full outer join departments d
+on d.departments_id = e.departments_id

@@ -1,0 +1,18 @@
+select customer_id from payment
+group by customer_id; 
+
+select distinct customer_id
+from payment ;
+
+select customer_id, sum(amount),  as amount_sum from payment
+group by customer_id
+order by sum(amount) desc 
+; 
+select staff_id, sum(amount) as sum_amount, count(payment_id) as total_count from payment p
+group by staff_id 
+order by sum_amount desc ;
+
+select a.staff_id, b.staff_id, b.first_name, b.last_name, count(a.payment_id) as count
+from payment a, staff b
+where a.staff_id = b.staff_id
+group by a.staff_id , b.staff_id, b.first_name , b.last_name ;

@@ -1,0 +1,16 @@
+select
+	to_char (rental_date,'yyyy') as y,
+	to_char (rental_date,
+	'mm') as m,
+	to_char (rental_date,
+	'dd') as d,
+	count(*)
+from
+	rental r
+group by
+	rollup (to_char (rental_date,'yyyy'),
+	to_char (rental_date,'mm'),
+	to_char (rental_date,'dd'))
+;
+select * from rental r ;
+select * from customer c 

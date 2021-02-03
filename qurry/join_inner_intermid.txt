@@ -1,0 +1,59 @@
+-- join intermediate
+
+insert
+	into
+	categories (category_name)
+values ('smart phone'),
+('laptop'),
+('tablet');
+
+insert
+	into
+	products (product_name,
+	category_id)
+values ('iphone',
+1),
+('samsung galaxy',
+1),
+('hp elite',
+2),
+('lenovo thinkpad',
+2),
+('ipad',
+3),
+('kindle fire',
+3);
+
+commit;
+
+select
+	*
+from
+	categories
+select
+	p.category_id,
+	p.product_id,
+	c.category_name,
+	p.product_name
+from
+	products p
+inner join categories c on
+	c.category_id = p.category_id;
+
+select
+	*
+from
+	products natural
+join categories b;
+
+select
+	c.category_id,
+	p.product_id,
+	p.product_name,
+	c.category_name
+from
+	categories c ,
+	products p
+where
+	c.category_id = p.category_id;
+

@@ -1,0 +1,36 @@
+select
+	r.customer_id,
+	row_number() over (order by count(r.return_date) desc ),
+	count(r.return_date),
+	max(c.last_name) ,
+	max(c.first_name)
+from
+	rental r,
+	customer c
+where
+	c.customer_id = r.customer_id
+group by
+	r.customer_id
+order by
+	count desc
+	
+	
+select
+	a.customer_id,
+	c.first_name,
+	c.last_name,
+	count_rent,
+	row_number () over (order by count_rent desc ) as rank
+from
+	(
+	select
+		r.customer_id,
+		count(r.return_date) as count_rent
+	from
+		rental r
+	group by
+		r.customer_id ) as a,
+	customer c
+where
+	a.customer_id = c.customer_id
+limit 1;

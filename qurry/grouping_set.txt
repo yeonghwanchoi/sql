@@ -1,0 +1,76 @@
+create table sales (
+brand varchar not null,
+segment varchar  not null,
+quantity int not null,
+primary key (brand, segment)
+);
+
+insert into sales (brand, segment, quantity)
+values
+	('abc','premium',100),
+	('abc', 'basic', 200),
+	('xyz', 'premium',100),
+	('xyz', 'basic', 300);
+
+select * from sales;
+
+select
+	segment ,
+	brand ,
+	sum(quantity)
+from
+	sales
+group by
+	grouping sets((brand,
+	segment),
+	(brand),
+	(segment),
+	());
+
+select
+	segment ,
+	brand ,
+	sum(quantity)
+from
+	sales
+group by
+	grouping sets((brand,
+	segment),
+	(brand),
+	(segment),
+	());
+
+select grouping(brand) grouping_brand,
+	 	grouping(segment) grouping_segment,
+	 	brand,
+	 	segment,
+	 	sum(quantity)
+	 from sales
+	group by 
+	grouping sets (
+		(brand,segment),
+		(brand),
+		(segment),
+		()
+	)
+
+select 
+	case when grouping(brand) = 0 and grouping(segment) = 0 then 'by brand_ by segment'
+		 when grouping(brand) = 0 and grouping(segment) = 1 then 'by brand'
+ 		 when grouping(brand) = 1 and grouping(segment) = 0 then 'by segment'
+	     when grouping(brand) = 1 and grouping(segment) = 1 then 'aggregation'
+		 else ''
+		 end as "total aggreation",
+      	 brand,
+      	 segment,
+      	 sum(quantity)
+from sales
+group by 
+grouping sets
+(
+	(brand, segment),
+	(brand),
+	(segment),
+	()
+);
+	

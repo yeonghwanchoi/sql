@@ -1,0 +1,23 @@
+-- full outer join, look up
+select
+	a.id aid ,
+	a.fruit afu ,
+	b.id bid ,
+	b.fruit bfu
+from
+	basket_a a
+full outer join basket_b b on
+	a.fruit = b.fruit;
+
+select
+	a.id aid ,
+	a.fruit afu ,
+	b.id bid ,
+	b.fruit bfu
+from
+	basket_a a
+full outer join basket_b b on
+	a.fruit = b.fruit
+where
+	a.id is null
+	or b.id is null ; 

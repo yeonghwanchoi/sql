@@ -1,0 +1,25 @@
+insert into cross_t1 (label)
+values ('a'),('b');
+
+insert into cross_t2 (score)
+values ('1'),('2'),('3');
+
+commit;
+
+select * from cross_t1 
+cross join cross_t2;
+
+select
+	label,
+	case
+		when label = 'a' then sum(score)
+		when label = 'b' then sum(score) * -1
+		else 0
+	end as calc
+from
+	cross_t1
+cross join cross_t2
+group by
+	label
+order by
+	label;
